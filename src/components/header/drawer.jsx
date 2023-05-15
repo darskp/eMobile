@@ -6,8 +6,8 @@ const DrawerComp = ({pages}) => {
     const [openDrawer, setopenDrawer] = useState(false);
     console.log(pages);
     return (<>
-        <Drawer open={openDrawer} onClose={()=>setopenDrawer(false)}>
-            <List>
+        <Drawer anchor='top' open={openDrawer} onClose={() => setopenDrawer(false)} sx={{zIndex: '1',transition:"0.5s all" }}>
+            <List sx={{ marginTop: "50px",transition:"0.5s all"}}>
                 {
                 pages.map((data,index)=>{
                     return (
