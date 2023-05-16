@@ -17,12 +17,6 @@ const DrawerComp = ({pages}) => {
                             style={{
                                 textDecoration: "none",
                             }}
-                            sx={{
-                                "&:focus, &:hover, &:visited, &:link, &:active": {
-                                    backgroundColor: "none !important",
-                                    // Add any other active styles you want to remove
-                                },
-                            }}
                         >
                     <ListItem disablePadding key={data.id}>
                                 <ListItemButton onClick={() => { setopenDrawer(false) }}>

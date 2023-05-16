@@ -1,7 +1,6 @@
-import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Typography, Grid, createTheme, ThemeProvider } from '@mui/material';
+import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Typography, Grid} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useState, useEffect } from 'react';
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState} from 'react';
 import Drawer from './drawer';
 import { NavLink as RouterLink } from 'react-router-dom';
 const PAGES =
@@ -35,26 +34,11 @@ const PAGES =
 
 
 const Header = () => {
-
     const [value, setvalue] = useState(null)
     let theme = useTheme()
     let ismatch = useMediaQuery(theme.breakpoints.down('md'));
-    const itheme = createTheme({
-        components: {
-            MuiTabs: {
-                styleOverrides: {
-                    indicator: {
-                        backgroundColor: '#ffffff'
-                    }
-                }
-            }
-        }
-    });
-    useEffect(() => {
-        setvalue(0)
-    }, [])
     return (
-        <>
+        <div style={{ height: "9.1vh" }}>
             {
                 ismatch ?
                     <>
@@ -94,8 +78,7 @@ const Header = () => {
                     </>
                     :
                     <>
-                        <ThemeProvider theme={itheme}>
-                            <AppBar sx={{ background: "#063970", padding: "0px 40px" }}>
+                            <AppBar sx={{ background: "#063970", padding: "0px 30px" }}>
                                 <Toolbar>
                                     <Grid
                                         container
@@ -122,30 +105,31 @@ const Header = () => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <Tabs sx={{ marginLeft: "auto" }} textColor='inherit' value={value} indicatorColor="primary" onChange={(e, val) => { setvalue(val) }}>
+                                          <Tabs sx={{ marginLeft: "auto" }} textColor='inherit' value={value} onChange={(e, val) => { setvalue(val) }}>
                                                 {
                                                     PAGES.filter((data, index) => {
                                                         return (index < 3)
                                                     }).map((data, index) => {
                                                         return (
-                                                            <Tab key={data.id} label={data.name} exact={data.link === "/"}  component={RouterLink} to={data.link} 
-                                                             />))}
-                                            
-                                                           </Tabs>
+                                                            <Tab key={data.id} label={data.name}  component={RouterLink} to={data.link} sx={{ marginLeft:"25px", textDecoration: "none",
+                                                            }} />)
+                                                    })
+                                                }
+                                            </Tabs>
                                         </Grid>
                                         <Grid item xs={3}>
                                             <Grid
                                                 container
                                                 direction="row"
-                                                justifyContent="space-between"
+                                                justifyContent="space-around"
                                                 alignItems="center"
                                             >
 
                                                 <Grid item xs={4}>
-                                                    <Button variant="outlined" size="small" component={RouterLink} to="/contact">Login</Button>
+                                                    <Button variant="outlined" size="small" component={RouterLink} to="/login">Login</Button>
                                                 </Grid>
                                                 <Grid item xs={4}>
-                                                    <Button variant="contained" sx={{ letterSpacing: "1px" }} size="small" component={RouterLink} to="/contact">SignUp</Button>
+                                                    <Button variant="contained" sx={{ letterSpacing: "1px" }} size="small" component={RouterLink} to="/signup">SignUp</Button>
                                                 </Grid>
                                                 <Grid item xs={4}>
                                                     <RouterLink to="/cart" style={{ textDecoration: "none" }}>
@@ -164,10 +148,9 @@ const Header = () => {
                                     </Grid>
                                 </Toolbar>
                             </AppBar>
-                        </ThemeProvider>
                     </>
             }
-        </>
+        </div>
     )
 }
 
