@@ -1,7 +1,7 @@
 
 import { Drawer, List, ListItemButton, ListItemIcon,ListItemText ,ListItem,IconButton} from '@mui/material'
 import {useState} from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 import MenuIcon from '@mui/icons-material/Menu';
 const DrawerComp = ({pages}) => {
