@@ -2,6 +2,7 @@ import { Button, Box, Typography, TextField } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { NavLink as RouterLink } from 'react-router-dom';
 import styles from './auth.module.scss';
+
 const Login = () => {
     return (
         <>

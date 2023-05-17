@@ -3,7 +3,7 @@ const Loader = () => {
     return ReactDOM.createPortal(
         <div>
             <div className="loader">
-                <img src="/images/loading/gif" alt="loading" />
+                <img src="/images/loading.gif" alt="loading" />
             </div>
 
         </div>,
