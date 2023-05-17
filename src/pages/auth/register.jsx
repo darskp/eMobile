@@ -1,12 +1,12 @@
 import { Button, Box, Typography, TextField } from '@mui/material';
-import GoogleIcon from '@mui/icons-material/Google';
 import { NavLink as RouterLink, useNavigate} from 'react-router-dom';
 import styles from './auth.module.scss';
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import {auth} from '../../firebase/config.js';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import 'react-toastify/dist/ReactToastify.css';import Loader from '../../loader/loader';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../loader/loader';
 
 const Register = () => {
      let navigate = useNavigate();
@@ -34,6 +34,9 @@ const Register = () => {
                 toast.error(error.message);
             });
     }
+
+  
+
     return (
         <>
         <ToastContainer/>
