@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Tooltip,Typography, Grid } from '@mui/material';
+import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Tooltip, Typography, Grid, Badge } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useEffect, useState } from 'react';
 import Drawer from './drawer';
@@ -65,11 +65,11 @@ const Header = () => {
     }, [displayName, dispatch])
     let isloginstatus = useSelector(selectIsLoggedIN);
     return (
-        <div style={{ height: "9.1vh" }}>
+        <>
             {
                 ismatch ?
                     <>
-                        <AppBar sx={{ background: "#063970", padding: "0px 10px" }}>
+                        <AppBar position="static" sx={{ background: "#063970", padding: "0px 10px" }}>
                             <Toolbar>
                                 <Grid
                                     container
@@ -90,7 +90,7 @@ const Header = () => {
                                                 }
                                             }}
                                         >
-                                            eMobile
+                                            eShop
                                         </Typography>
                                     </Grid>
 
@@ -118,7 +118,7 @@ const Header = () => {
                     </>
                     :
                     <>
-                        <AppBar sx={{ background: "#063970", padding: "0px 30px" }}>
+                        <AppBar position="static" sx={{ background: "#063970", padding: "0px 30px" }}>
                             <Toolbar>
                                 <Grid
                                     container
@@ -141,7 +141,7 @@ const Header = () => {
                                             to="/"
 
                                         >
-                                            eMobile
+                                            eShop
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={6}>
@@ -167,7 +167,7 @@ const Header = () => {
                                         >
                                             <ShowOnLogoff>
                                                 <Grid item xs={4}>
-                                                    <Button variant="outlined" size="small" color='warning' component={RouterLink} to="/login">Login</Button>
+                                                    <Button variant="outlined" size="small" component={RouterLink} to="/login">Login</Button>
                                                 </Grid>
                                                 <Grid item xs={4}>
                                                     <Button variant="contained" sx={{ letterSpacing: "1px" }} size="small" component={RouterLink} to="/signup">SignUp</Button>
@@ -183,14 +183,15 @@ const Header = () => {
                                             </ShowOnLogin>
                                             <Grid item xs={4}>
                                                 <RouterLink to="/cart" style={{ textDecoration: "none" }}>
-                                                    <ShoppingCartIcon
-                                                        sx={{
-                                                            fontSize: "30px",
+                                                    <Badge color="warning" badgeContent={4}> 
+                                                        <ShoppingCartIcon sx={{
+                                                            fontSize: "20px",
                                                             marginTop: "9px",
                                                             marginLeft: "25px",
                                                             color: "white"
                                                         }}
-                                                    />
+                                                        />
+                                                    </Badge>
                                                 </RouterLink>
                                             </Grid>
                                         </Grid>
@@ -200,7 +201,7 @@ const Header = () => {
                         </AppBar>
                     </>
             }
-        </div>
+        </>
     )
 }
 
