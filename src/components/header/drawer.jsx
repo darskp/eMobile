@@ -1,9 +1,8 @@
-
 import { Drawer, List, ListItemButton, ListItemIcon,ListItemText ,ListItem,IconButton} from '@mui/material'
 import {useState} from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
-
 import MenuIcon from '@mui/icons-material/Menu';
+import { ShowOnLogin, ShowOnLogoff } from '../hiddenLink/hiddenLink';
 const DrawerComp = ({pages}) => {
     const [openDrawer, setopenDrawer] = useState(false);
     return (<>
@@ -29,8 +28,54 @@ const DrawerComp = ({pages}) => {
                     )
                 })
                 }
+                <ShowOnLogoff>
+                <RouterLink
+                    to='/login'
+                    style={{
+                        textDecoration: "none",
+                    }}
+                >
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { setopenDrawer(false) }}>
+                            <ListItemIcon>
+                                <ListItemText>Login</ListItemText>
+                            </ListItemIcon>
+                        </ListItemButton>
+                    </ListItem>
+                </RouterLink>
+                <RouterLink
+                    to='/signup'
+                    style={{
+                        textDecoration: "none",
+                    }}
+                >
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { setopenDrawer(false) }}>
+                            <ListItemIcon>
+                                <ListItemText>Signup</ListItemText>
+                            </ListItemIcon>
+                        </ListItemButton>
+                    </ListItem>
+                </RouterLink>
+                </ShowOnLogoff>
+                <ShowOnLogin>
+                <RouterLink
+                    to='/login'
+                    style={{
+                        textDecoration: "none",
+                    }}
+                >
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { setopenDrawer(false) }}>
+                            <ListItemIcon>
+                                <ListItemText>Logout</ListItemText>
+                            </ListItemIcon>
+                        </ListItemButton>
+                    </ListItem>
+                </RouterLink>
+                </ShowOnLogin>
             </List>
-            
+
         </Drawer>
         <IconButton onClick={() => setopenDrawer(!openDrawer)} sx={{color:"white",marginLeft:"auto"}}>
             <MenuIcon />

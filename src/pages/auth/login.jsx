@@ -54,7 +54,7 @@ return(
                 <div style={{ height: "80vh", display: 'flex', alignItems: 'center' }}>
                     <Box boxShadow={'5px 5px 10px #ccc'}
                         sx={{
-                            '& .MuiTextField-root': { m: 1, width: '35ch' }, width: "60%", height: "90%", borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: "center", margin: 'auto', flexDirection: 'column', padding: "20px 20px",
+                            '& .MuiTextField-root': { m: 1, width: '35ch' }, width: "80%", height: "90%", borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: "center", margin: 'auto', flexDirection: 'column', padding: "20px 20px",
                             ":hover": {
                                 boxShadow:
                                     '10px 10px 20px #ccc'
@@ -87,7 +87,7 @@ return(
                         }}><RouterLink to="/reset" component={RouterLink} className={styles.signupRouterLink}>Forgotten Password</RouterLink></Typography>
                         <Button type="submit" variant='contained' color='primary' sx={{ margin: "10px 0px", padding: "6px 150px", fontWeight: 'bold' }}>Login</Button>
                         <Typography>--OR--</Typography>
-                    <Button startIcon={<GoogleIcon />} variant='contained' color='warning' sx={{ margin: "10px 0px", padding: "5px 82px", fontWeight: 'bold' }} onClick={googleAuth}>Login with Google</Button>
+                    <Button startIcon={<GoogleIcon />} variant='contained' color='warning' sx={{ margin: "10px 0px", padding: "6px 82px", fontWeight: 'bold' }} onClick={googleAuth}>Login with Google</Button>
                         <Typography sx={{
                             marginTop: "10px", cursor: "pointer", color: "#333"
                         }}>Don't have an Account? &nbsp;

@@ -1,14 +1,17 @@
-import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Typography, Grid } from '@mui/material';
+import { AppBar, Toolbar, Tabs, Tab, Button, useTheme, useMediaQuery, Tooltip,Typography, Grid } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useEffect, useState } from 'react';
 import Drawer from './drawer';
 import { auth } from '../../firebase/config.js'
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
-import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { NavLink as RouterLink} from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch, useSelector } from 'react-redux';
+import { SET_ACTIVE_USER, SET_REMOVE_USER, selectIsLoggedIN } from '../../redux/slice/authSlice';
+import { ShowOnLogin, ShowOnLogoff } from '../hiddenLink/hiddenLink';
 const PAGES =
     [
         {
@@ -25,24 +28,14 @@ const PAGES =
             id: 3,
             link: '/aboutus',
             name: "About Us"
-        },
-        {
-            id: 4,
-            link: '/login',
-            name: "Login"
-        },
-        {
-            id: 5,
-            link: '/signup',
-            name: "Sign Up"
         }
     ]
 const Header = () => {
-    const [value, setvalue] = useState(null)
+    let dispatch = useDispatch()
+    const [value, setvalue] = useState(0)
     const [displayName, setdisplayName] = useState('')
     let theme = useTheme()
     let ismatch = useMediaQuery(theme.breakpoints.down('md'));
-    let location = useLocation();
     let signout = () => {
         signOut(auth).then(() => {
             toast.success("Logout Successfully")
@@ -51,17 +44,26 @@ const Header = () => {
         });
     }
     useEffect(() => {
-        onAuthStateChanged (auth, (user) => {
+        onAuthStateChanged(auth, (user) => {
             if (user) {
-                const displayName = user.displayName;
-                console.log(displayName);
-
-                displayName == '' ? setdisplayName(displayName) : setdisplayName('User')
+                if (user.displayName !== null) {
+                    setdisplayName(user.displayName)
+                } else {
+                    let uName = user.email.slice(0, user.email.indexOf('@'));
+                    setdisplayName(uName.charAt(0).toUpperCase() + uName.slice(1))
+                }
+                dispatch(SET_ACTIVE_USER({
+                    userName: displayName,
+                    userID: user.uid,
+                    email: user.email
+                }))
             } else {
-                setdisplayName('error')
+                setdisplayName('');
+                dispatch(SET_REMOVE_USER());
             }
         });
-    }, [])
+    }, [displayName, dispatch])
+    let isloginstatus = useSelector(selectIsLoggedIN);
     return (
         <div style={{ height: "9.1vh" }}>
             {
@@ -73,7 +75,7 @@ const Header = () => {
                                     container
                                     alignItems="center"
                                 >
-                                    <Grid item xs={10}>
+                                    <Grid item xs={isloginstatus ? 9:10}>
                                         <Typography
                                             component={RouterLink}
                                             to="/"
@@ -91,9 +93,22 @@ const Header = () => {
                                             eMobile
                                         </Typography>
                                     </Grid>
-                                    <Grid item xs={1}>
-                                        <ShoppingCartIcon sx={{ marginTop: "7px" }} />
-                                    </Grid>
+
+                                    <ShowOnLogin>
+                                        <Grid item xs={1}>
+                                            <Tooltip title={displayName} arrow>
+                                                <AccountCircleIcon sx={{ marginTop: "7px" }} />
+                                            </Tooltip>
+                                        </Grid>
+                                        <Grid item xs={1}>
+                                            <ShoppingCartIcon sx={{ marginTop: "7px" }} />
+                                        </Grid>
+                                    </ShowOnLogin>
+                                    <ShowOnLogoff>
+                                        <Grid item xs={1}>
+                                            <ShoppingCartIcon sx={{ marginTop: "7px" }} />
+                                        </Grid>
+                                    </ShowOnLogoff>
                                     <Grid item xs={1}>
                                         <Drawer pages={PAGES} />
                                     </Grid>
@@ -150,25 +165,22 @@ const Header = () => {
                                             justifyContent="space-around"
                                             alignItems="center"
                                         >
-                                            {
-                                                location.pathname !== '/admin' ? <>
-                                                    <Grid item xs={4}>
-                                                        <Button variant="outlined" size="small" color='warning' component={RouterLink} to="/login">Login</Button>
-                                                    </Grid>
-                                                    <Grid item xs={4}>
-                                                        <Button variant="contained" sx={{ letterSpacing: "1px" }} size="small" component={RouterLink} to="/signup">SignUp</Button>
-                                                    </Grid>
-                                                </> :
-                                                    <>
-                                                        <Grid item xs={4}>
-                                                            <Button size="small" startIcon={<AccountCircleIcon />} variant='contained' color='warning'>{displayName}</Button>
-                                                        </Grid>
-                                                        <Grid item xs={4}>
-                                                            <Button onClick={signout} variant="outlined" size="small" color='warning' component={RouterLink} to="/">Logout</Button>
-                                                        </Grid>
-                                                    </>
-
-                                            }
+                                            <ShowOnLogoff>
+                                                <Grid item xs={4}>
+                                                    <Button variant="outlined" size="small" color='warning' component={RouterLink} to="/login">Login</Button>
+                                                </Grid>
+                                                <Grid item xs={4}>
+                                                    <Button variant="contained" sx={{ letterSpacing: "1px" }} size="small" component={RouterLink} to="/signup">SignUp</Button>
+                                                </Grid>
+                                            </ShowOnLogoff>
+                                            <ShowOnLogin>
+                                                <Grid item xs={4}>
+                                                    <Button size="small" startIcon={<AccountCircleIcon />} variant='contained' color='warning'>{displayName}</Button>
+                                                </Grid>
+                                                <Grid item xs={4}>
+                                                    <Button onClick={signout} variant="outlined" size="small" color='warning' component={RouterLink} to="/">Logout</Button>
+                                                </Grid>
+                                            </ShowOnLogin>
                                             <Grid item xs={4}>
                                                 <RouterLink to="/cart" style={{ textDecoration: "none" }}>
                                                     <ShoppingCartIcon
