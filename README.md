@@ -1,4 +1,5 @@
 # User Registration and Authentication
+Demo video URL : [URL here](https://drive.google.com/file/d/1HL1PtH3UtAHiOuUO1_ig6jdHEXOkGeVg/view?usp=sharing)
 
 ## Table of Contents
 - [Introduction](#Introduction)
@@ -15,7 +16,7 @@
 The User Registration and Auth project focuses on implementing user registration and authentication functionality using Firebase and React Redux Toolkit.
 
 ## Screenshot
-- Demo video URL : [URL here](https://drive.google.com/file/d/1HL1PtH3UtAHiOuUO1_ig6jdHEXOkGeVg/view?usp=sharing)
+[![Demo Video](https://raw.githubusercontent.com/darskp/eShop/main/src/Image.png)](https://drive.google.com/file/d/1HL1PtH3UtAHiOuUO1_ig6jdHEXOkGeVg/view?usp=sharing)
 
 ## Links
 - GitHub URL: [GitHub URL here](https://github.com/darskp/eShop)
