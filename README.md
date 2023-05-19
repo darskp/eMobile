@@ -19,7 +19,7 @@ The User Registration and Auth project focuses on implementing user registration
 
 ## Links
 - GitHub URL: [GitHub URL here](https://github.com/darskp/eShop)
-- 
+
 ## Features
 - This project aims to provide a secure user registration and authentication process.
 - Users can sign up and log in using their credentials and access the application features.
