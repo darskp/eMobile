@@ -1,5 +1,5 @@
 # User Registration and Authentication
-Demo video URL : [URL here](https://drive.google.com/file/d/1HL1PtH3UtAHiOuUO1_ig6jdHEXOkGeVg/view?usp=sharing)
+Demo video URL : [Click here](https://drive.google.com/file/d/1HL1PtH3UtAHiOuUO1_ig6jdHEXOkGeVg/view?usp=sharing)
 
 ## Table of Contents
 - [Introduction](#Introduction)
